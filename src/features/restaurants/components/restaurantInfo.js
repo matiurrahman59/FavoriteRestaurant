@@ -1,4 +1,3 @@
-import React from 'react';
 import { SvgXml } from 'react-native-svg';
 
 import open from '../../../../assets/open';
@@ -16,7 +15,7 @@ import {
   SectionEnd,
 } from './restaurantInfoStyles';
 
-const RestaurantInfo = ({ restaurant = {} }) => {
+const RestaurantInfo = ({ restaurant = {}, navigation }) => {
   const {
     name = 'Some Restaurant',
     icon = 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png',
@@ -27,19 +26,25 @@ const RestaurantInfo = ({ restaurant = {} }) => {
     isOpenNow = true,
     rating = 4,
     isClosedTemporarily = false,
+    placeId,
   } = restaurant;
 
   const ratingArray = Array.from(new Array(Math.floor(rating)));
 
   return (
-    <RestaurantCard>
+    <RestaurantCard onPress={() => navigation.navigate('details')}>
       <RestaurantCardImage source={{ uri: photos[0] }} />
       <Info>
         <Text variant='label'>{name}</Text>
         <Section>
           <Rating>
             {ratingArray.map((_, i) => (
-              <SvgXml key={i} xml={star} width={24} height={24} />
+              <SvgXml
+                key={`star-${placeId}-${i}`}
+                xml={star}
+                width={24}
+                height={24}
+              />
             ))}
           </Rating>
 
