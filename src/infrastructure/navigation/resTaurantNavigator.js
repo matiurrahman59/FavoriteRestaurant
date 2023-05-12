@@ -1,19 +1,7 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
-import { Button, Text, View } from 'react-native';
+import RestaurantDetailsScreen from '../../features/restaurants/screens/restaurantDetailsScreen';
 import RestaurantScreen from '../../features/restaurants/screens/restaurantScreen';
-
-const RenderNothing = ({ navigation }) => {
-  return (
-    <View>
-      <Text>Item Details Page</Text>
-      <Button
-        title='Go to Home Page'
-        onPress={() => navigation.navigate('Restaurant')}
-      />
-    </View>
-  );
-};
 
 const RestaurantStack = createStackNavigator();
 
@@ -25,7 +13,10 @@ export default function RestaurantsNavigator() {
       }}
     >
       <RestaurantStack.Screen name='Restaurant' component={RestaurantScreen} />
-      <RestaurantStack.Screen name='details' component={RenderNothing} />
+      <RestaurantStack.Screen
+        name='RestaurantDetails'
+        component={RestaurantDetailsScreen}
+      />
     </RestaurantStack.Navigator>
   );
 }

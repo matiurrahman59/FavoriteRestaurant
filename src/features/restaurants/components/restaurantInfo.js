@@ -15,7 +15,7 @@ import {
   SectionEnd,
 } from './restaurantInfoStyles';
 
-const RestaurantInfo = ({ restaurant = {}, navigation }) => {
+const RestaurantInfo = ({ restaurant = {} }) => {
   const {
     name = 'Some Restaurant',
     icon = 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png',
@@ -32,7 +32,7 @@ const RestaurantInfo = ({ restaurant = {}, navigation }) => {
   const ratingArray = Array.from(new Array(Math.floor(rating)));
 
   return (
-    <RestaurantCard onPress={() => navigation.navigate('details')}>
+    <RestaurantCard>
       <RestaurantCardImage source={{ uri: photos[0] }} />
       <Info>
         <Text variant='label'>{name}</Text>
@@ -63,7 +63,3 @@ const RestaurantInfo = ({ restaurant = {}, navigation }) => {
 };
 
 export default RestaurantInfo;
-
-{
-  /* <Icon name='star' color='yellow' size={24} /> */
-}
