@@ -2,6 +2,7 @@ import { SvgXml } from 'react-native-svg';
 
 import open from '../../../../assets/open';
 import star from '../../../../assets/star';
+import { Favourite } from '../../../components/favourites/favouriteComponent';
 import { Text } from '../../../components/typography/textComponent';
 
 import {
@@ -33,6 +34,7 @@ const RestaurantInfo = ({ restaurant = {} }) => {
 
   return (
     <RestaurantCard>
+      <Favourite restaurant={restaurant} />
       <RestaurantCardImage source={{ uri: photos[0] }} />
       <Info>
         <Text variant='label'>{name}</Text>
