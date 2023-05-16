@@ -4,6 +4,7 @@ import { ActivityIndicator } from 'react-native-paper';
 import styled from 'styled-components/native';
 import { FavouritesBar } from '../../../components/favourites/favouriteBarComponent';
 import { SafeArea } from '../../../components/utility/sareAreaComponent';
+import { AuthenticationContext } from '../../../services/authentication/authenticationContext';
 import { FavouritesContext } from '../../../services/favourites/favouriteContext';
 import { RestaurantsContext } from '../../../services/restaurants/restaurantContext';
 import RestaurantInfo from '../components/restaurantInfo';
@@ -23,8 +24,11 @@ const LoadingContainer = styled(View)`
 
 const RestaurantScreen = ({ navigation }) => {
   const { isLoading, restaurants } = useContext(RestaurantsContext);
+  const { user } = useContext(AuthenticationContext);
   const { favourites } = useContext(FavouritesContext);
   const [isToggled, setIsToggled] = useState(false);
+
+  console.log('--res--', user);
 
   return (
     <SafeArea>

@@ -11,6 +11,7 @@ import { ThemeProvider } from 'styled-components/native';
 
 import { Navigator } from './src/infrastructure/navigation';
 import { theme } from './src/infrastructure/theme';
+import { AuthenticationContextProvider } from './src/services/authentication/authenticationContext';
 import { FavouritesContextProvider } from './src/services/favourites/favouriteContext';
 import { LocationContextProvider } from './src/services/location/locationContext';
 import { RestaurantsContextProvider } from './src/services/restaurants/restaurantContext';
@@ -30,13 +31,15 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <FavouritesContextProvider>
-          <LocationContextProvider>
-            <RestaurantsContextProvider>
-              <Navigator />
-            </RestaurantsContextProvider>
-          </LocationContextProvider>
-        </FavouritesContextProvider>
+        <AuthenticationContextProvider>
+          <FavouritesContextProvider>
+            <LocationContextProvider>
+              <RestaurantsContextProvider>
+                <Navigator />
+              </RestaurantsContextProvider>
+            </LocationContextProvider>
+          </FavouritesContextProvider>
+        </AuthenticationContextProvider>
       </ThemeProvider>
       <ExpoStatusBar style='auto' />
     </>
