@@ -1,6 +1,7 @@
-import React from 'react';
-
+import LottieView from 'lottie-react-native';
+import React, { useRef } from 'react';
 import { View } from 'react-native';
+
 import {
   AccountBackground,
   AccountContainer,
@@ -10,9 +11,25 @@ import {
 } from '../components/accountStyles';
 
 const AccountScreen = ({ navigation }) => {
+  const animation = useRef(null);
   return (
     <AccountBackground>
       <AccountCover />
+      <View
+        style={{
+          position: 'absolute',
+          top: 30,
+          width: '100%',
+          height: '40%',
+        }}
+      >
+        <LottieView
+          autoPlay
+          ref={animation}
+          resizeMode='cover'
+          source={require('../../../../assets/watermelon.json')}
+        />
+      </View>
       <Title>Meals To Go</Title>
       <AccountContainer>
         <AuthButton

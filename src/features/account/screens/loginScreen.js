@@ -89,7 +89,7 @@ const LoginScreen = ({ navigation }) => {
               Login
             </AuthButton>
           ) : (
-            <ActivityIndicator animating={true} color={MD2Colors.red800} />
+            <ActivityIndicator animating={true} color='pink' />
           )}
         </View>
       </AccountContainer>

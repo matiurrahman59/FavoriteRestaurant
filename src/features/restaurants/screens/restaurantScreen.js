@@ -28,8 +28,6 @@ const RestaurantScreen = ({ navigation }) => {
   const { favourites } = useContext(FavouritesContext);
   const [isToggled, setIsToggled] = useState(false);
 
-  console.log('--res--', user);
-
   return (
     <SafeArea>
       <Search

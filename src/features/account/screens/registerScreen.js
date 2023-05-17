@@ -110,7 +110,7 @@ const RegisterScreen = ({ navigation }) => {
               Register
             </AuthButton>
           ) : (
-            <ActivityIndicator animating={true} color={MD2Colors.red800} />
+            <ActivityIndicator animating={true} color='red' />
           )}
         </View>
       </AccountContainer>

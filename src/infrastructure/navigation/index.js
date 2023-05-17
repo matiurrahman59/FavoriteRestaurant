@@ -6,9 +6,7 @@ import { AccountNavigator } from './accountNavigator';
 import AppNavigator from './appNavigator';
 
 export const Navigator = () => {
-  const { user, isLoading } = useContext(AuthenticationContext);
-
-  console.log('---1---index', user);
+  const { user } = useContext(AuthenticationContext);
 
   return (
     <NavigationContainer>

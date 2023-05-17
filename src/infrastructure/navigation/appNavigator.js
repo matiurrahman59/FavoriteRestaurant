@@ -1,19 +1,14 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import React from 'react';
-import { Text } from 'react-native';
 
-import { SafeArea } from '../../components/utility/sareAreaComponent';
 import MapScreen from '../../features/map/screens/mapScreen';
-import RestaurantsNavigator from './resTaurantNavigator';
 
-function SettingsScreen() {
-  return (
-    <SafeArea>
-      <Text>Settings!</Text>
-    </SafeArea>
-  );
-}
+import { FavouritesContextProvider } from '../../services/favourites/favouriteContext';
+import { LocationContextProvider } from '../../services/location/locationContext';
+import { RestaurantsContextProvider } from '../../services/restaurants/restaurantContext';
+
+import RestaurantsNavigator from './resTaurantNavigator';
+import SettingsNavigator from './settingsNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -43,11 +38,17 @@ const createScreenOptions = ({ route }) => {
 
 const AppNavigator = () => {
   return (
-    <Tab.Navigator screenOptions={createScreenOptions} headerMode='none'>
-      <Tab.Screen name='Restaurants' component={RestaurantsNavigator} />
-      <Tab.Screen name='Map' component={MapScreen} />
-      <Tab.Screen name='Settings' component={SettingsScreen} />
-    </Tab.Navigator>
+    <FavouritesContextProvider>
+      <LocationContextProvider>
+        <RestaurantsContextProvider>
+          <Tab.Navigator screenOptions={createScreenOptions}>
+            <Tab.Screen name='Restaurants' component={RestaurantsNavigator} />
+            <Tab.Screen name='Map' component={MapScreen} />
+            <Tab.Screen name='Settings' component={SettingsNavigator} />
+          </Tab.Navigator>
+        </RestaurantsContextProvider>
+      </LocationContextProvider>
+    </FavouritesContextProvider>
   );
 };
 

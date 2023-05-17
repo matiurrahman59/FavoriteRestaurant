@@ -6,11 +6,14 @@ export const AuthenticationContext = createContext({
   isLoading: Boolean,
   onLogin: (email, password) => {},
   onRegister: (email, password, repeatedPassword) => {},
+  isAuthenticated: Boolean,
+  onLogout: () => {},
 });
 
 export const AuthenticationContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const saveUser = async (value) => {
     try {
@@ -22,14 +25,13 @@ export const AuthenticationContextProvider = ({ children }) => {
   };
 
   const loadUser = async () => {
-    setIsLoading(true);
     try {
       const jsonValue = await AsyncStorage.getItem('@user');
       if (jsonValue) {
+        setIsAuthenticated(true);
         setUser(JSON.parse(jsonValue));
-        setIsLoading(false);
       } else {
-        setIsLoading(false);
+        setIsAuthenticated(false);
       }
     } catch (e) {
       console.log('error loading', e);
@@ -37,13 +39,15 @@ export const AuthenticationContextProvider = ({ children }) => {
   };
 
   const onLogin = (email, password) => {
-    setIsLoading(true);
     saveUser({ email, password });
     setUser({
       email,
       password,
     });
-    setIsLoading(false);
+  };
+
+  const onLogout = () => {
+    setUser(null);
   };
 
   const onRegister = (email, password, repeatedPassword) => {
@@ -59,8 +63,10 @@ export const AuthenticationContextProvider = ({ children }) => {
       value={{
         user,
         isLoading,
+        isAuthenticated,
         onLogin,
         onRegister,
+        onLogout,
       }}
     >
       {children}
