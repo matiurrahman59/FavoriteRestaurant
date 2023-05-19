@@ -28,7 +28,6 @@ const CameraScreen = ({ navigation }) => {
   const takePicture = async () => {
     if (cameraRef) {
       const photo = await cameraRef.takePictureAsync();
-      console.log(photo);
       AsyncStorage.setItem(`${user.email}-photo`, photo.uri);
       navigation.goBack();
     }

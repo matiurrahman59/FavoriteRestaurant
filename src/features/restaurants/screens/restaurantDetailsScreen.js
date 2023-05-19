@@ -1,16 +1,21 @@
-import React, { useState } from 'react';
-import { Button, ScrollView, Text, View } from 'react-native';
-import { List } from 'react-native-paper';
+import React, { useContext, useState } from 'react';
+import { ScrollView } from 'react-native';
+import { Button, List } from 'react-native-paper';
+
+import { Spacer } from '../../../components/spacer/spacerComponent';
 import { SafeArea } from '../../../components/utility/sareAreaComponent';
+import { CartContext } from '../../../services/cart/cartContext';
 import RestaurantInfo from '../components/restaurantInfo';
+import { OrderButton } from '../components/restaurantInfoStyles';
 
 const RestaurantDetailsScreen = ({ route, navigation }) => {
+  const { addToCart, cart } = useContext(CartContext);
+  const { restaurant } = route.params;
+
   const [breakfastExpanded, setBreakfastExpanded] = useState(false);
   const [lunchExpanded, setLunchExpanded] = useState(false);
   const [dinnerExpanded, setDinnerExpanded] = useState(false);
   const [drinksExpanded, setDrinksExpanded] = useState(false);
-
-  const { restaurant } = route.params;
 
   return (
     <SafeArea>
@@ -65,10 +70,17 @@ const RestaurantDetailsScreen = ({ route, navigation }) => {
         </List.Accordion>
       </ScrollView>
 
-      {/* <Button
-        title='Go Back'
-        onPress={() => navigation.navigate('Restaurant')}
-      /> */}
+      <Spacer position='bottom' size='large'>
+        <OrderButton
+          mode='contained'
+          onPress={() => {
+            addToCart({ item: 'special', price: 1299 }, restaurant);
+            navigation.navigate('Checkout');
+          }}
+        >
+          Order Special Only 12.99!
+        </OrderButton>
+      </Spacer>
     </SafeArea>
   );
 };
